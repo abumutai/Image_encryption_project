@@ -270,7 +270,7 @@ public class Files extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 0, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\MUTAI\\Documents\\Image Encryption\\images\\Encrypt2.jpg")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/Encrypt2.jpg"))); // NOI18N
         jButton2.setText("Encrypted ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

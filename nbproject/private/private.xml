@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Login.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/NewAccount.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Dashboard.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Send.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Decrypt.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Encrypt.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Settings.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/Help.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/myConnection.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/AdminLogin.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/AdminPanel.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/Users.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/FileFrame.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/SettingsFrame.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/AdminPanel.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/Statistics.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

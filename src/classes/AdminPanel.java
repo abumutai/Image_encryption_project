@@ -1,9 +1,7 @@
 
 package classes;
 
-import classes.frames.FileFrame;
-import classes.frames.SettingsFrame;
-import classes.frames.Users;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -610,12 +608,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-       mainmenu.removeAll();
-       mainmenu.repaint();
-       
-       Users use= new Users();
-       mainmenu.add(use);
-       
+      
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
@@ -656,8 +649,6 @@ public class AdminPanel extends javax.swing.JFrame {
         mainmenu.removeAll();
        mainmenu.repaint();
        
-       FileFrame use= new FileFrame();
-       mainmenu.add(use);
        
     }//GEN-LAST:event_jLabel19MouseClicked
 
@@ -665,9 +656,7 @@ public class AdminPanel extends javax.swing.JFrame {
          mainmenu.removeAll();
        mainmenu.repaint();
        
-       SettingsFrame use= new SettingsFrame();
-       mainmenu.add(use);
-       
+     
     }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
