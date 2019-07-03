@@ -8,6 +8,8 @@ package classes.frames;
 import classes.frames.myframes.AdminGuide;
 import classes.frames.myframes.Home;
 import classes.frames.myframes.Files;
+import classes.frames.myframes.Issues;
+import classes.frames.myframes.Notifications;
 import classes.frames.myframes.Settings;
 import classes.frames.myframes.Statistics;
 import classes.frames.myframes.Users;
@@ -40,12 +42,15 @@ Users users;
        
         initComponents();
         String username= jTextField1.getText();
+       
         home= new Home();
         files= new Files();
         admin= new AdminGuide();
         set= new Settings();
         stat= new Statistics();
         users= new Users();
+       
+        
         
         
         
@@ -70,6 +75,9 @@ Users users;
         c.gridx=0;
         c.gridy=0;
         DynamicPanel.add(users,c);
+         c.gridx=0;
+        c.gridy=0;
+     
         
         home.setVisible(true);
          Display();
@@ -78,36 +86,105 @@ Users users;
         set.setVisible(false);
         stat.setVisible(false);
         users.setVisible(false);
+         
         btnHome.setBackground(Color.white);
         btnHome.setForeground(Color.blue);
         
         
     }
-void username(String username){
    
+void username(String username){
+   set.settings(username);
     jTextField1.setText(username);
+       
     
 }
+
 public void Display(){
            java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
           PreparedStatement ps;
           ResultSet rs;
+          String newUsers=null;
+          String encrypted= null;
+          String sent= null;
+          String decrypted= null;
+          String notifications=null;
+          String issues=null;
        String query= "SELECT COUNT(ID) FROM users WHERE dateofreg=?" ; 
         try {
             ps= myConnection.getConnection().prepareStatement(query);
             ps.setTimestamp(1,date);
             rs=ps.executeQuery();
             if(rs.next()){
-                String newUsers= rs.getString("count(ID)");
-              home.Content(newUsers);
+                 newUsers= rs.getString("count(ID)");
+             
             }
-        query = "SELECT COUNT(ID) FROM users WHERE dateofreg=?" ; 
-        
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        query = "SELECT COUNT(img_id) FROM encrypted WHERE enc_date=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setTimestamp(1,date);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 encrypted= rs.getString("count(img_id)");
             
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        query = "SELECT COUNT(img_id) FROM sent WHERE sent_date=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setTimestamp(1,date);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 sent= rs.getString("count(img_id)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        query = "SELECT COUNT(img_id) FROM decrypted WHERE dec_date=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setTimestamp(1,date);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 decrypted= rs.getString("count(img_id)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        query = "SELECT COUNT(ID) FROM notifications WHERE date=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setTimestamp(1,date);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 notifications= rs.getString("count(ID)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        query = "SELECT COUNT(ID) FROM issues WHERE date=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setTimestamp(1,date);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 issues= rs.getString("count(ID)");
+            
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
          
+          home.Content(newUsers,encrypted,sent,decrypted,notifications,issues);
       }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,6 +209,7 @@ public void Display(){
         jLabel12 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/encyptor.png"))); // NOI18N
 
@@ -300,12 +378,16 @@ public void Display(){
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/encyptor.png"))); // NOI18N
+
         javax.swing.GroupLayout PanelButton1Layout = new javax.swing.GroupLayout(PanelButton1);
         PanelButton1.setLayout(PanelButton1Layout);
         PanelButton1Layout.setHorizontalGroup(
             PanelButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelButton1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,6 +401,10 @@ public void Display(){
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
+            .addGroup(PanelButton1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,7 +431,7 @@ public void Display(){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DynamicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -353,6 +439,7 @@ public void Display(){
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         home.setVisible(true);
+        
         files.setVisible(false);
         admin.setVisible(false);
         set.setVisible(false);
@@ -548,6 +635,7 @@ public void Display(){
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

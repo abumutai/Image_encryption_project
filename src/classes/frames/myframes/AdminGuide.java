@@ -47,6 +47,8 @@ public class AdminGuide extends javax.swing.JPanel {
         jLabel38 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 255));

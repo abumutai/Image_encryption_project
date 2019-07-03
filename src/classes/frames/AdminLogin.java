@@ -7,6 +7,7 @@ package classes.frames;
 
 import classes.*;
 import classes.frames.myframes.Home;
+import classes.frames.myframes.Settings;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -269,7 +270,9 @@ public class AdminLogin extends javax.swing.JFrame {
                  AdminPanel db= new AdminPanel();
                 String username= rs.getString("username");
                 db.username(username);
-                 
+                Settings st= new Settings();
+                st.settings(username);
+                
                  db.setVisible(true);
                  this.dispose();
                
