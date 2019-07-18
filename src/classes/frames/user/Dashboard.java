@@ -1,0 +1,625 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package classes.frames.user;
+
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author MUTAI
+ */
+public class Dashboard extends javax.swing.JFrame {
+GridBagLayout grid= new GridBagLayout();
+UserHome home;
+UserFiles files;
+
+Settings set;
+Encrypt enc;
+Decrypt dec;
+Send send;
+    /**
+     * Creates new form TestAdmin
+     */
+    public Dashboard() {
+        initComponents();
+        String username= jTextField1.getText();
+        home= new UserHome();
+        files= new UserFiles();
+       
+        set= new Settings();
+        enc= new Encrypt();
+        dec= new Decrypt();
+        send= new Send();
+        
+        
+        
+        DynamicPanel.setLayout(grid);
+        GridBagConstraints c= new GridBagConstraints();
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(home,c);
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(files,c);
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(set,c);
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(enc,c);
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(dec,c);
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(send,c);
+        
+        
+        home.setVisible(true);
+        files.setVisible(false);
+        set.setVisible(false);
+        enc.setVisible(false);
+        dec.setVisible(false);
+        send.setVisible(false);
+        
+        btnHome1.setBackground(Color.white);
+        btnHome1.setForeground(Color.blue);
+        
+        
+    }
+void username(String username){
+    jTextField1.setText(username);
+    Display(username);
+}
+public void Display(String username){
+ 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Timestamp Bdate = new java.sql.Timestamp(new java.util.Date().getTime());
+        
+         String date= format.format(Bdate);
+ 
+           
+          PreparedStatement ps;
+          ResultSet rs;
+          
+          
+          
+          
+          String encrypted= null;
+           String sent= null;
+           String decrypted= null;
+          String notSent=null;
+          String success= "sent";
+          String failed= "fail";
+         String query = "SELECT COUNT(img_id) FROM encrypted" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+           // ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 encrypted= rs.getString("count(img_id)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         query = "SELECT COUNT(img_id) FROM decrypted" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            //ps.setString(1,username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 decrypted= rs.getString("count(img_id)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      
+        query = "SELECT COUNT(img_id) FROM sent WHERE status=? and sender=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setString(1,success);
+            ps.setString(2, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 sent= rs.getString("count(img_id)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        query = "SELECT COUNT(img_id) FROM sent WHERE status=? and sender=?"; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setString(1,failed);
+            ps.setString(2,username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 notSent= rs.getString("count(img_id)");
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         home.Home(encrypted, decrypted, sent, notSent);
+      }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        PanelButton = new javax.swing.JPanel();
+        btnEncrypt = new javax.swing.JButton();
+        btnDecrypt = new javax.swing.JButton();
+        btnSend = new javax.swing.JButton();
+        btnHelp = new javax.swing.JButton();
+        btnSettings = new javax.swing.JButton();
+        btnHome1 = new javax.swing.JButton();
+        DynamicPanel = new javax.swing.JPanel();
+        PanelButton1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 204));
+
+        PanelButton.setBackground(new java.awt.Color(0, 0, 255));
+
+        btnEncrypt.setBackground(new java.awt.Color(0, 0, 255));
+        btnEncrypt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEncrypt.setForeground(new java.awt.Color(255, 255, 255));
+        btnEncrypt.setText("Encrypt");
+        btnEncrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncryptActionPerformed(evt);
+            }
+        });
+
+        btnDecrypt.setBackground(new java.awt.Color(0, 0, 255));
+        btnDecrypt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDecrypt.setForeground(new java.awt.Color(255, 255, 255));
+        btnDecrypt.setText("Decrypt");
+        btnDecrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDecryptActionPerformed(evt);
+            }
+        });
+
+        btnSend.setBackground(new java.awt.Color(0, 0, 255));
+        btnSend.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSend.setForeground(new java.awt.Color(255, 255, 255));
+        btnSend.setText("Send");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendActionPerformed(evt);
+            }
+        });
+
+        btnHelp.setBackground(new java.awt.Color(0, 0, 255));
+        btnHelp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnHelp.setForeground(new java.awt.Color(255, 255, 255));
+        btnHelp.setText("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
+
+        btnSettings.setBackground(new java.awt.Color(0, 0, 255));
+        btnSettings.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSettings.setForeground(new java.awt.Color(255, 255, 255));
+        btnSettings.setText("Settings");
+        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingsActionPerformed(evt);
+            }
+        });
+
+        btnHome1.setBackground(new java.awt.Color(0, 0, 255));
+        btnHome1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnHome1.setForeground(new java.awt.Color(255, 255, 255));
+        btnHome1.setText("Home");
+        btnHome1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHome1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelButtonLayout = new javax.swing.GroupLayout(PanelButton);
+        PanelButton.setLayout(PanelButtonLayout);
+        PanelButtonLayout.setHorizontalGroup(
+            PanelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButtonLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(PanelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEncrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDecrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        PanelButtonLayout.setVerticalGroup(
+            PanelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButtonLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(164, Short.MAX_VALUE))
+        );
+
+        DynamicPanel.setBackground(new java.awt.Color(102, 255, 204));
+
+        javax.swing.GroupLayout DynamicPanelLayout = new javax.swing.GroupLayout(DynamicPanel);
+        DynamicPanel.setLayout(DynamicPanelLayout);
+        DynamicPanelLayout.setHorizontalGroup(
+            DynamicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 629, Short.MAX_VALUE)
+        );
+        DynamicPanelLayout.setVerticalGroup(
+            DynamicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
+
+        PanelButton1.setBackground(new java.awt.Color(0, 0, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/encyptor.png"))); // NOI18N
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 204), 2, true)));
+        jPanel7.setForeground(new java.awt.Color(0, 0, 255));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Welcome:");
+
+        jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 255));
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Abu");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addComponent(jTextField1))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
+        );
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/logout.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Exit(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelButton1Layout = new javax.swing.GroupLayout(PanelButton1);
+        PanelButton1.setLayout(PanelButton1Layout);
+        PanelButton1Layout.setHorizontalGroup(
+            PanelButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButton1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        PanelButton1Layout.setVerticalGroup(
+            PanelButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButton1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(DynamicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(PanelButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DynamicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
+        home.setVisible(false);
+        files.setVisible(false);
+        set.setVisible(false);
+        enc.setVisible(true);
+        dec.setVisible(false);
+        send.setVisible(false);
+        
+       btnEncrypt.setBackground(Color.white);
+        btnEncrypt.setForeground(Color.blue);
+        btnDecrypt.setBackground(Color.blue);
+        btnDecrypt.setForeground(Color.white);
+        
+        btnSettings.setBackground(Color.blue);
+        btnSettings.setForeground(Color.white);
+       
+        btnSend.setBackground(Color.blue);
+        btnSend.setForeground(Color.white);
+         btnHelp.setBackground(Color.blue);
+        btnHelp.setForeground(Color.white);
+        btnHome1.setBackground(Color.blue);
+        btnHome1.setForeground(Color.white);
+      
+    }//GEN-LAST:event_btnEncryptActionPerformed
+
+    private void btnDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecryptActionPerformed
+        home.setVisible(false);
+        files.setVisible(false);
+        set.setVisible(false);
+        enc.setVisible(false);
+        dec.setVisible(true);
+         send.setVisible(false);
+         
+         btnEncrypt.setBackground(Color.blue);
+        btnEncrypt.setForeground(Color.white);
+        btnDecrypt.setBackground(Color.white);
+        btnDecrypt.setForeground(Color.blue);
+    
+        btnSettings.setBackground(Color.blue);
+        btnSettings.setForeground(Color.white);
+        
+        btnSend.setBackground(Color.blue);
+        btnSend.setForeground(Color.white);
+         btnHelp.setBackground(Color.blue);
+        btnHelp.setForeground(Color.white);
+        btnHome1.setBackground(Color.blue);
+        btnHome1.setForeground(Color.white);
+    }//GEN-LAST:event_btnDecryptActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+     home.setVisible(false);
+        files.setVisible(false);
+        set.setVisible(false);
+        enc.setVisible(false);
+        dec.setVisible(false);
+         send.setVisible(true);
+         
+         btnEncrypt.setBackground(Color.blue);
+        btnEncrypt.setForeground(Color.white);
+        btnDecrypt.setBackground(Color.blue);
+        btnDecrypt.setForeground(Color.white);
+        
+        btnSettings.setBackground(Color.blue);
+        btnSettings.setForeground(Color.white);
+    
+        btnSend.setBackground(Color.white);
+        btnSend.setForeground(Color.blue);
+         btnHelp.setBackground(Color.blue);
+        btnHelp.setForeground(Color.white);
+        btnHome1.setBackground(Color.blue);
+        btnHome1.setForeground(Color.white);
+    }//GEN-LAST:event_btnSendActionPerformed
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        home.setVisible(false);
+        files.setVisible(false);
+        enc.setVisible(false);
+        set.setVisible(false);
+        dec.setVisible(false);
+         send.setVisible(false);
+         
+         btnEncrypt.setBackground(Color.blue);
+        btnEncrypt.setForeground(Color.white);
+        btnDecrypt.setBackground(Color.blue);
+        btnDecrypt.setForeground(Color.white);
+        
+        btnSettings.setBackground(Color.blue);
+        btnSettings.setForeground(Color.white);
+       
+        btnSend.setBackground(Color.blue);
+        btnSend.setForeground(Color.white);
+         btnHelp.setBackground(Color.white);
+        btnHelp.setForeground(Color.blue);
+        btnHome1.setBackground(Color.blue);
+        btnHome1.setForeground(Color.white);
+    }//GEN-LAST:event_btnHelpActionPerformed
+
+    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
+        home.setVisible(false);
+        files.setVisible(false);
+        enc.setVisible(false);
+        set.setVisible(true);
+        dec.setVisible(false);
+         send.setVisible(false);
+         
+         btnEncrypt.setBackground(Color.blue);
+        btnEncrypt.setForeground(Color.white);
+        btnDecrypt.setBackground(Color.blue);
+        btnDecrypt.setForeground(Color.white);
+       
+        btnSettings.setBackground(Color.white);
+        btnSettings.setForeground(Color.blue);
+       
+        btnSend.setBackground(Color.blue);
+        btnSend.setForeground(Color.white);
+         btnHelp.setBackground(Color.blue);
+        btnHelp.setForeground(Color.white);
+        btnHome1.setBackground(Color.blue);
+        btnHome1.setForeground(Color.white);
+    }//GEN-LAST:event_btnSettingsActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnHome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHome1ActionPerformed
+        home.setVisible(true);
+        files.setVisible(false);
+        enc.setVisible(false);
+        set.setVisible(false);
+        dec.setVisible(false);
+         send.setVisible(false);
+         
+         btnEncrypt.setBackground(Color.blue);
+        btnEncrypt.setForeground(Color.white);
+        btnDecrypt.setBackground(Color.blue);
+        btnDecrypt.setForeground(Color.white);
+      
+        btnSettings.setBackground(Color.blue);
+        btnSettings.setForeground(Color.white);
+        
+        btnSend.setBackground(Color.blue);
+        btnSend.setForeground(Color.white);
+         btnHelp.setBackground(Color.blue);
+        btnHelp.setForeground(Color.white);
+        btnHome1.setBackground(Color.white);
+        btnHome1.setForeground(Color.blue);
+    }//GEN-LAST:event_btnHome1ActionPerformed
+
+    private void Exit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Exit
+        UserLogin login = new UserLogin();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Exit
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Dashboard().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel DynamicPanel;
+    private javax.swing.JPanel PanelButton;
+    private javax.swing.JPanel PanelButton1;
+    private javax.swing.JButton btnDecrypt;
+    private javax.swing.JButton btnEncrypt;
+    private javax.swing.JButton btnHelp;
+    private javax.swing.JButton btnHome1;
+    private javax.swing.JButton btnSend;
+    private javax.swing.JButton btnSettings;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JTextField jTextField1;
+    // End of variables declaration//GEN-END:variables
+}

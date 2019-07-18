@@ -3,33 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Decrypt.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Notification.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/AdminLogin.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Notifications.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myConnection.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/Reset.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Issue.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/AdminPanel.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/Dashboard.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/UserHome.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/AdminReset.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Issues.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Settings.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/AdminGuide.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Help.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Users.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/NewAccount.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/ChangePass.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/UserFiles.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Send.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/UserLogin.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Home.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Statistics.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Encrypt.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/Files.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/myframes/UserSettings.java</file>
-            <file>file:/C:/Users/MUTAI/Documents/Image%20Encryption/src/classes/frames/ForgetPassword.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/user/UserHome.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/admin/AdminPanel.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/admin/Encrypted.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/user/ForgetPassword.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/user/Dashboard.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/admin/AdminLogin.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/user/Reset.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/user/EncryptedFiles.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/user/Encrypted.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/admin/Settings.java</file>
+            <file>file:/C:/Users/SUDO/Documents/Image%20Encryption/src/classes/frames/admin/Home.java</file>
         </group>
     </open-files>
 </project-private>
