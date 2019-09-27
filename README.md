@@ -1,1 +1,1 @@
-Project on image encryption using chaotic techiques
+Project on image encryption using chaotic techiques in java
