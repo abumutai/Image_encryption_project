@@ -11,12 +11,10 @@ import java.awt.GridBagLayout;
  *
  * @author MUTAI
  */
+
 public class DecryptedFiles extends javax.swing.JFrame {
 GridBagLayout grid= new GridBagLayout();
 Decrypted ns= new Decrypted();
-
-
-
 
     /**
      * Creates new form JTest
@@ -43,6 +41,9 @@ Decrypted ns= new Decrypted();
     private void initComponents() {
 
         jNotif = new javax.swing.JPanel();
+        jUsername = new javax.swing.JLabel();
+        PanelButton4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -55,27 +56,69 @@ Decrypted ns= new Decrypted();
         jNotif.setLayout(jNotifLayout);
         jNotifLayout.setHorizontalGroup(
             jNotifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
+            .addGroup(jNotifLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jNotifLayout.setVerticalGroup(
             jNotifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGroup(jNotifLayout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(273, Short.MAX_VALUE))
+        );
+
+        PanelButton4.setBackground(new java.awt.Color(0, 0, 255));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/encyptor.png"))); // NOI18N
+
+        javax.swing.GroupLayout PanelButton4Layout = new javax.swing.GroupLayout(PanelButton4);
+        PanelButton4.setLayout(PanelButton4Layout);
+        PanelButton4Layout.setHorizontalGroup(
+            PanelButton4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButton4Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel4)
+                .addContainerGap(658, Short.MAX_VALUE))
+        );
+        PanelButton4Layout.setVerticalGroup(
+            PanelButton4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButton4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jNotif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jNotif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jNotif, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(PanelButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jNotif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+void username(String username){
+  jUsername.setText(username);
+}
+void Name(String username){
+   
+    ns.Table(username);
 
+}
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
      
     }//GEN-LAST:event_formWindowClosed
@@ -123,6 +166,24 @@ Decrypted ns= new Decrypted();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelButton1;
+    private javax.swing.JPanel PanelButton2;
+    private javax.swing.JPanel PanelButton3;
+    private javax.swing.JPanel PanelButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jNotif;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel jUsername;
     // End of variables declaration//GEN-END:variables
 }

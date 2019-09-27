@@ -57,7 +57,7 @@ public class AddAdmin extends javax.swing.JFrame {
         jRoles = new javax.swing.JTextField();
         jPhone = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 255));
@@ -265,6 +265,7 @@ public class AddAdmin extends javax.swing.JFrame {
                   
                    if(ps.executeUpdate()>0){
                        JOptionPane.showMessageDialog(null,"Admin added successfully\n Default password 'admin' set","Success",JOptionPane.INFORMATION_MESSAGE);
+                      this.dispose();
                    }
                    else{
                        JOptionPane.showMessageDialog(null, "Could not register", "Error", JOptionPane.ERROR_MESSAGE);

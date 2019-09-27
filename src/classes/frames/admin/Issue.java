@@ -44,6 +44,8 @@ Issues is= new Issues();
     private void initComponents() {
 
         jIssues = new javax.swing.JPanel();
+        PanelButton2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -58,11 +60,31 @@ Issues is= new Issues();
         jIssues.setLayout(jIssuesLayout);
         jIssuesLayout.setHorizontalGroup(
             jIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         jIssuesLayout.setVerticalGroup(
             jIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGap(0, 326, Short.MAX_VALUE)
+        );
+
+        PanelButton2.setBackground(new java.awt.Color(0, 0, 255));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/encyptor.png"))); // NOI18N
+
+        javax.swing.GroupLayout PanelButton2Layout = new javax.swing.GroupLayout(PanelButton2);
+        PanelButton2.setLayout(PanelButton2Layout);
+        PanelButton2Layout.setHorizontalGroup(
+            PanelButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButton2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(624, Short.MAX_VALUE))
+        );
+        PanelButton2Layout.setVerticalGroup(
+            PanelButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelButton2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -70,10 +92,14 @@ Issues is= new Issues();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jIssues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jIssues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(PanelButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jIssues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -122,6 +148,8 @@ Issues is= new Issues();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelButton2;
     private javax.swing.JPanel jIssues;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

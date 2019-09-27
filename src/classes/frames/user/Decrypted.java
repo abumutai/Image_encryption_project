@@ -6,8 +6,13 @@
 package classes.frames.user;
 import classes.frames.admin.*;
 import classes.frames.user.myConnection;
+import java.awt.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -22,7 +27,7 @@ public class Decrypted extends javax.swing.JPanel {
      */
     public Decrypted() {
         initComponents();
-        Table();
+    
     }
 
     /**
@@ -34,83 +39,263 @@ public class Decrypted extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jUsername = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jUsername = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        input = new javax.swing.JTextField();
+        btnHome1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        lbl_image = new javax.swing.JLabel();
+        usern = new javax.swing.JLabel();
 
-        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Decrypted Images", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255))); // NOI18N
         setMinimumSize(new java.awt.Dimension(607, 307));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(102, 102, 102));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Image ID", "User", "Decrypted Date"
+                "Image ID", "Decrypted date"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTable1);
 
-        jUsername.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(0, 0, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/delete1.png"))); // NOI18N
+        jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jUsernameActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Image ID:");
+        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 2, true));
+
+        input.setBackground(new java.awt.Color(0, 0, 255));
+        input.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        input.setForeground(new java.awt.Color(255, 255, 255));
+        input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputActionPerformed(evt);
+            }
+        });
+
+        btnHome1.setBackground(new java.awt.Color(0, 0, 255));
+        btnHome1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnHome1.setForeground(new java.awt.Color(255, 255, 255));
+        btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/search1.png"))); // NOI18N
+        btnHome1.setText("Search");
+        btnHome1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnHome1.setIconTextGap(1);
+        btnHome1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHome1ActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 5, true), "Selected Image", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 255))); // NOI18N
+        jPanel5.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        lbl_image.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        usern.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        usern.setForeground(new java.awt.Color(240, 240, 240));
+        usern.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(305, 305, 305)
-                .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(294, 294, 294)
+                .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(usern, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(313, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(73, 73, 73))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnHome1)))
+                    .addContainerGap(322, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(usern, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(28, 28, 28)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUsernameActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+int confirm= JOptionPane.showConfirmDialog(null, "Do you want to delete the image","CONFIRM",JOptionPane.YES_NO_CANCEL_OPTION);
+if(confirm==JOptionPane.YES_OPTION){
+        String img_id= input.getText();
+    if(img_id.isEmpty()){
+        JOptionPane.showMessageDialog(null,"Please select an image","SELECT",JOptionPane.WARNING_MESSAGE);
+        }
+    else{
+        PreparedStatement ps;
+        ResultSet rs;
+        String query="DELETE FROM decrypted WHERE img_id=?";
+    try {
+        ps=myConnection.getConnection().prepareStatement(query);
+        ps.setString(1,img_id);
+        if(ps.executeUpdate()>0){
+            JOptionPane.showMessageDialog(null, "Image deleted","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+             String username= usern.getText();
+                  Table(username);
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Could not delete image","ERROR",JOptionPane.ERROR_MESSAGE); 
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Decrypted.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        
+    }
+}
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jUsernameActionPerformed
+    }//GEN-LAST:event_inputActionPerformed
+
+    private void btnHome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHome1ActionPerformed
+String img_id= input.getText();
+if(img_id.isEmpty()){
+    JOptionPane.showMessageDialog(null,"Please enter the image id","WARNING",JOptionPane.WARNING_MESSAGE);
+}
+else{
+    PreparedStatement ps;
+    ResultSet rs;
+    String query="SELECT* FROM decrypted WHERE img_id=?";
+    try {
+        ps=myConnection.getConnection().prepareStatement(query);
+        ps.setString(1,img_id);
+        rs=ps.executeQuery();
+        if(rs.next()){
+            byte[] img= rs.getBytes("img_data");
+                        ImageIcon image=new ImageIcon(img);
+                        Image im= image.getImage();
+                        Image myImg= im.getScaledInstance(lbl_image.getWidth(),lbl_image.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon newImage= new ImageIcon(myImg);
+                        lbl_image.setIcon(newImage);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Could not find image","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Decrypted.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+}
+    }//GEN-LAST:event_btnHome1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       try{
+            int row=jTable1.getSelectedRow();
+            String table_click=(jTable1.getModel().getValueAt(row, 0).toString());
+            PreparedStatement ps;
+            ResultSet rs;
+            String query= "SELECT * FROM decrypted WHERE img_id=?";
+            ps=myConnection.getConnection().prepareStatement(query);
+            ps.setString(1,table_click);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                byte[] img= rs.getBytes("img_data");
+                        ImageIcon image=new ImageIcon(img);
+                        Image im= image.getImage();
+                        Image myImg= im.getScaledInstance(lbl_image.getWidth(),lbl_image.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon newImage= new ImageIcon(myImg);
+                        lbl_image.setIcon(newImage);
+                    
+                        String id=rs.getString("img_id");
+                        input.setText(id);
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 void username(String username){
     jUsername.setText(username);
+    
 }
-public void Table(){
+public void Table(String username){
+    usern.setText(username);
     PreparedStatement ps = null;
         ResultSet rs = null;
     try{
-        String username= jUsername.getText();
+        
         String sql= "select img_id,dec_date from decrypted where username=?";
         ps=myConnection.getConnection().prepareStatement(sql);
-        ps.setString(1, username);
+        ps.setString(1,username);
         rs= ps.executeQuery();
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
         
@@ -129,8 +314,15 @@ public void Table(){
     }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHome1;
+    private javax.swing.JTextField input;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jUsername;
+    private javax.swing.JLabel jUsername;
+    private javax.swing.JLabel lbl_image;
+    private javax.swing.JLabel usern;
     // End of variables declaration//GEN-END:variables
 }

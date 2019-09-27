@@ -25,11 +25,12 @@ public class Dashboard extends javax.swing.JFrame {
 GridBagLayout grid= new GridBagLayout();
 UserHome home;
 UserFiles files;
-
+UserHelp help;
 Settings set;
 Encrypt enc;
 Decrypt dec;
 Send send;
+Encrypted ec; 
     /**
      * Creates new form TestAdmin
      */
@@ -38,12 +39,12 @@ Send send;
         String username= jTextField1.getText();
         home= new UserHome();
         files= new UserFiles();
-       
+        help= new UserHelp();
         set= new Settings();
         enc= new Encrypt();
         dec= new Decrypt();
         send= new Send();
-        
+        ec = new Encrypted();
         
         
         DynamicPanel.setLayout(grid);
@@ -66,7 +67,9 @@ Send send;
         c.gridx=0;
         c.gridy=0;
         DynamicPanel.add(send,c);
-        
+        c.gridx=0;
+        c.gridy=0;
+        DynamicPanel.add(help,c);
         
         home.setVisible(true);
         files.setVisible(false);
@@ -74,6 +77,7 @@ Send send;
         enc.setVisible(false);
         dec.setVisible(false);
         send.setVisible(false);
+        help.setVisible(false);
         
         btnHome1.setBackground(Color.white);
         btnHome1.setForeground(Color.blue);
@@ -82,84 +86,20 @@ Send send;
     }
 void username(String username){
     jTextField1.setText(username);
+    set.Usersettings(username);
     Display(username);
+    ChangePassword cp= new ChangePassword();
+    cp.ChangePasswords(username);
+    enc.username(username);
+    ReportIssue rs = new ReportIssue();
+    rs.nm.setText(username);
+   
 }
 public void Display(String username){
  
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        java.sql.Timestamp Bdate = new java.sql.Timestamp(new java.util.Date().getTime());
+   
         
-         String date= format.format(Bdate);
- 
-           
-          PreparedStatement ps;
-          ResultSet rs;
-          
-          
-          
-          
-          String encrypted= null;
-           String sent= null;
-           String decrypted= null;
-          String notSent=null;
-          String success= "sent";
-          String failed= "fail";
-         String query = "SELECT COUNT(img_id) FROM encrypted" ; 
-        try {
-            ps= myConnection.getConnection().prepareStatement(query);
-           // ps.setString(1, username);
-            rs=ps.executeQuery();
-            if(rs.next()){
-                 encrypted= rs.getString("count(img_id)");
-            
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-         query = "SELECT COUNT(img_id) FROM decrypted" ; 
-        try {
-            ps= myConnection.getConnection().prepareStatement(query);
-            //ps.setString(1,username);
-            rs=ps.executeQuery();
-            if(rs.next()){
-                 decrypted= rs.getString("count(img_id)");
-            
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-      
-        query = "SELECT COUNT(img_id) FROM sent WHERE status=? and sender=?" ; 
-        try {
-            ps= myConnection.getConnection().prepareStatement(query);
-            ps.setString(1,success);
-            ps.setString(2, username);
-            rs=ps.executeQuery();
-            if(rs.next()){
-                 sent= rs.getString("count(img_id)");
-            
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        query = "SELECT COUNT(img_id) FROM sent WHERE status=? and sender=?"; 
-        try {
-            ps= myConnection.getConnection().prepareStatement(query);
-            ps.setString(1,failed);
-            ps.setString(2,username);
-            rs=ps.executeQuery();
-            if(rs.next()){
-                 notSent= rs.getString("count(img_id)");
-            
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-         home.Home(encrypted, decrypted, sent, notSent);
+         home.Home(username);
       }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,8 +112,6 @@ public void Display(String username){
 
         PanelButton = new javax.swing.JPanel();
         btnEncrypt = new javax.swing.JButton();
-        btnDecrypt = new javax.swing.JButton();
-        btnSend = new javax.swing.JButton();
         btnHelp = new javax.swing.JButton();
         btnSettings = new javax.swing.JButton();
         btnHome1 = new javax.swing.JButton();
@@ -197,26 +135,6 @@ public void Display(String username){
         btnEncrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncryptActionPerformed(evt);
-            }
-        });
-
-        btnDecrypt.setBackground(new java.awt.Color(0, 0, 255));
-        btnDecrypt.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnDecrypt.setForeground(new java.awt.Color(255, 255, 255));
-        btnDecrypt.setText("Decrypt");
-        btnDecrypt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDecryptActionPerformed(evt);
-            }
-        });
-
-        btnSend.setBackground(new java.awt.Color(0, 0, 255));
-        btnSend.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnSend.setForeground(new java.awt.Color(255, 255, 255));
-        btnSend.setText("Send");
-        btnSend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSendActionPerformed(evt);
             }
         });
 
@@ -258,8 +176,6 @@ public void Display(String username){
                 .addGap(18, 18, 18)
                 .addGroup(PanelButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEncrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDecrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -272,15 +188,11 @@ public void Display(String username){
                 .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEncrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         DynamicPanel.setBackground(new java.awt.Color(102, 255, 204));
@@ -418,75 +330,30 @@ public void Display(String username){
         enc.setVisible(true);
         dec.setVisible(false);
         send.setVisible(false);
-        
+        help.setVisible(false);
+         
        btnEncrypt.setBackground(Color.white);
         btnEncrypt.setForeground(Color.blue);
-        btnDecrypt.setBackground(Color.blue);
-        btnDecrypt.setForeground(Color.white);
+        
         
         btnSettings.setBackground(Color.blue);
         btnSettings.setForeground(Color.white);
-       
-        btnSend.setBackground(Color.blue);
-        btnSend.setForeground(Color.white);
+      
+        
          btnHelp.setBackground(Color.blue);
         btnHelp.setForeground(Color.white);
         btnHome1.setBackground(Color.blue);
         btnHome1.setForeground(Color.white);
+        String username= jTextField1.getText();
+        UserHome us = new UserHome();
+        home.Home(username);
+          home.updateEnc(username);
       
     }//GEN-LAST:event_btnEncryptActionPerformed
-
-    private void btnDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecryptActionPerformed
-        home.setVisible(false);
-        files.setVisible(false);
-        set.setVisible(false);
-        enc.setVisible(false);
-        dec.setVisible(true);
-         send.setVisible(false);
-         
-         btnEncrypt.setBackground(Color.blue);
-        btnEncrypt.setForeground(Color.white);
-        btnDecrypt.setBackground(Color.white);
-        btnDecrypt.setForeground(Color.blue);
-    
-        btnSettings.setBackground(Color.blue);
-        btnSettings.setForeground(Color.white);
-        
-        btnSend.setBackground(Color.blue);
-        btnSend.setForeground(Color.white);
-         btnHelp.setBackground(Color.blue);
-        btnHelp.setForeground(Color.white);
-        btnHome1.setBackground(Color.blue);
-        btnHome1.setForeground(Color.white);
-    }//GEN-LAST:event_btnDecryptActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-     home.setVisible(false);
-        files.setVisible(false);
-        set.setVisible(false);
-        enc.setVisible(false);
-        dec.setVisible(false);
-         send.setVisible(true);
-         
-         btnEncrypt.setBackground(Color.blue);
-        btnEncrypt.setForeground(Color.white);
-        btnDecrypt.setBackground(Color.blue);
-        btnDecrypt.setForeground(Color.white);
-        
-        btnSettings.setBackground(Color.blue);
-        btnSettings.setForeground(Color.white);
-    
-        btnSend.setBackground(Color.white);
-        btnSend.setForeground(Color.blue);
-         btnHelp.setBackground(Color.blue);
-        btnHelp.setForeground(Color.white);
-        btnHome1.setBackground(Color.blue);
-        btnHome1.setForeground(Color.white);
-    }//GEN-LAST:event_btnSendActionPerformed
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         home.setVisible(false);
@@ -495,17 +362,16 @@ public void Display(String username){
         set.setVisible(false);
         dec.setVisible(false);
          send.setVisible(false);
+          help.setVisible(true);
          
          btnEncrypt.setBackground(Color.blue);
         btnEncrypt.setForeground(Color.white);
-        btnDecrypt.setBackground(Color.blue);
-        btnDecrypt.setForeground(Color.white);
+       
         
         btnSettings.setBackground(Color.blue);
         btnSettings.setForeground(Color.white);
        
-        btnSend.setBackground(Color.blue);
-        btnSend.setForeground(Color.white);
+        
          btnHelp.setBackground(Color.white);
         btnHelp.setForeground(Color.blue);
         btnHome1.setBackground(Color.blue);
@@ -519,17 +385,16 @@ public void Display(String username){
         set.setVisible(true);
         dec.setVisible(false);
          send.setVisible(false);
+          help.setVisible(false);
          
          btnEncrypt.setBackground(Color.blue);
         btnEncrypt.setForeground(Color.white);
-        btnDecrypt.setBackground(Color.blue);
-        btnDecrypt.setForeground(Color.white);
+     
        
         btnSettings.setBackground(Color.white);
         btnSettings.setForeground(Color.blue);
        
-        btnSend.setBackground(Color.blue);
-        btnSend.setForeground(Color.white);
+       
          btnHelp.setBackground(Color.blue);
         btnHelp.setForeground(Color.white);
         btnHome1.setBackground(Color.blue);
@@ -547,17 +412,16 @@ public void Display(String username){
         set.setVisible(false);
         dec.setVisible(false);
          send.setVisible(false);
+          help.setVisible(false);
          
          btnEncrypt.setBackground(Color.blue);
         btnEncrypt.setForeground(Color.white);
-        btnDecrypt.setBackground(Color.blue);
-        btnDecrypt.setForeground(Color.white);
+      
       
         btnSettings.setBackground(Color.blue);
         btnSettings.setForeground(Color.white);
         
-        btnSend.setBackground(Color.blue);
-        btnSend.setForeground(Color.white);
+   
          btnHelp.setBackground(Color.blue);
         btnHelp.setForeground(Color.white);
         btnHome1.setBackground(Color.white);
@@ -610,11 +474,9 @@ public void Display(String username){
     private javax.swing.JPanel DynamicPanel;
     private javax.swing.JPanel PanelButton;
     private javax.swing.JPanel PanelButton1;
-    private javax.swing.JButton btnDecrypt;
     private javax.swing.JButton btnEncrypt;
     private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnHome1;
-    private javax.swing.JButton btnSend;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

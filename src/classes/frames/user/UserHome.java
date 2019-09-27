@@ -24,17 +24,117 @@ public final class UserHome extends javax.swing.JPanel {
      */
     public UserHome() {
         initComponents();
+     
+    
+    }
+    
+void Home(String username) {
+        updateEnc(username);
+        updateDec(username);
+        updateSent(username);
+        updateReceived(username);
+         name.setText(username);
+         
+    }
+void updateEnc(String username){
+     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Timestamp Bdate = new java.sql.Timestamp(new java.util.Date().getTime());
         
+         String date= format.format(Bdate);
+ 
+           
+          PreparedStatement ps;
+          ResultSet rs;
+          
     
-    }
+    String query = "SELECT COUNT(img_id) FROM encrypted WHERE username=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                String encrypted= rs.getString("count(img_id)");
+               
+             jEncrypted.setText(encrypted);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+void updateDec(String username){
+     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Timestamp Bdate = new java.sql.Timestamp(new java.util.Date().getTime());
+        
+         String date= format.format(Bdate);
+ 
+           
+          PreparedStatement ps;
+          ResultSet rs;
+          
+         String query = "SELECT COUNT(img_id) FROM decrypted WHERE username=?" ; 
+         
+        try {
+           
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setString(1,username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                String decrypted= rs.getString("count(img_id)");
+            jDec.setText(decrypted);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+}
+void updateSent(String username){
+     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Timestamp Bdate = new java.sql.Timestamp(new java.util.Date().getTime());
+        
+         String date= format.format(Bdate);
+           
+          PreparedStatement ps;
+          ResultSet rs;
     
-void Home(String encrypted, String decrypted, String sent, String notSent) {
-        jEncrypted.setText(encrypted);
-        jDec.setText(decrypted);
-        jSent.setText(sent);
-        jNotSent.setText(notSent);
-    }
-
+    String query = "SELECT COUNT(img_id) FROM sent WHERE sender=?" ; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 String sent= rs.getString("count(img_id)");
+                    jSent.setText(sent);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+      
+   
+}
+void updateReceived(String username){
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Timestamp Bdate = new java.sql.Timestamp(new java.util.Date().getTime());
+        
+         String date= format.format(Bdate);
+   
+           
+          PreparedStatement ps;
+          ResultSet rs;
+    
+    String query = "SELECT COUNT(img_id) FROM sent WHERE receiver=?"; 
+        try {
+            ps= myConnection.getConnection().prepareStatement(query);
+            ps.setString(1,username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                 String notSent= rs.getString("count(img_id)");
+                 jNotSent.setText(notSent);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +164,7 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
         jLabel22 = new javax.swing.JLabel();
         jDec = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        name = new javax.swing.JLabel();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
@@ -109,7 +210,7 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
                 .addGroup(send4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
                     .addComponent(jEncrypted, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         send4Layout.setVerticalGroup(
@@ -136,11 +237,11 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
             }
         });
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/Sent Success.png"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/sent.png"))); // NOI18N
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel30.setText("Sent Success");
+        jLabel30.setText("Sent  Images");
 
         jSent.setBackground(new java.awt.Color(255, 255, 255));
         jSent.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -164,13 +265,12 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
         send6Layout.setHorizontalGroup(
             send6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(send6Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(send6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel30)
-                    .addComponent(jSent, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jSent, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         send6Layout.setVerticalGroup(
@@ -185,7 +285,7 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
                     .addGroup(send6Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jButton4))
         );
 
@@ -197,11 +297,11 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
             }
         });
 
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/sent failed.png"))); // NOI18N
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/received.jpg"))); // NOI18N
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("Sent Failed");
+        jLabel28.setText("Received");
 
         jNotSent.setBackground(new java.awt.Color(255, 255, 255));
         jNotSent.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -306,38 +406,48 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
                         .addComponent(jDec, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(send2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
+
+        name.setFont(new java.awt.Font("Tahoma", 0, 3)); // NOI18N
+        name.setForeground(new java.awt.Color(240, 240, 240));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(153, 153, 153)
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(send6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(send4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(176, 176, 176)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(send6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(send4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(send2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(send5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
+                    .addComponent(send2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(send5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(send4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(send2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(send5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(send6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(send4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(send2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(send5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(send6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -358,24 +468,33 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
     }//GEN-LAST:event_send2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       EncryptedFiles enc = new EncryptedFiles();
+      String username= name.getText();
+        EncryptedFiles enc = new EncryptedFiles();
        enc.setVisible(true);
+       enc.Name(username);
+       
        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DecryptedFiles dec= new DecryptedFiles();
         dec.setVisible(true);
+        String username= name.getText();
+        dec.Name(username);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         SentSuccessFiles ssf= new SentSuccessFiles();
         ssf.setVisible(true);
+        String username= name.getText();
+        ssf.Name(username);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        SentFailedFiles sff= new SentFailedFiles();
+        ReceivedFiles sff= new ReceivedFiles();
         sff.setVisible(true);
+        String username= name.getText();
+        sff.Name(username);
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -396,6 +515,7 @@ void Home(String encrypted, String decrypted, String sent, String notSent) {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jNotSent;
     private javax.swing.JLabel jSent;
+    private javax.swing.JLabel name;
     private javax.swing.JPanel send2;
     private javax.swing.JPanel send4;
     private javax.swing.JPanel send5;

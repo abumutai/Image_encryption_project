@@ -75,7 +75,7 @@ public class ChangePassword extends javax.swing.JFrame {
         JbtnLogin.setBackground(new java.awt.Color(255, 255, 255));
         JbtnLogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JbtnLogin.setForeground(new java.awt.Color(0, 0, 255));
-        JbtnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/frames/user/myframes/change.png"))); // NOI18N
+        JbtnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/change.png"))); // NOI18N
         JbtnLogin.setText("Change");
         JbtnLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         JbtnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -165,8 +165,8 @@ public class ChangePassword extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPasswordConf, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(JbtnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JbtnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 11, Short.MAX_VALUE))))
         );
 
@@ -192,17 +192,36 @@ public class ChangePassword extends javax.swing.JFrame {
 
     private void JbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbtnLoginActionPerformed
         String username=jUsername.getText();
-        String oldPass= jLabel2.getText();
+        String oldPass= jPassword.getText();
         String password= jNewPassword.getText();
         String confPassword= jPasswordConf.getText();
+        boolean checkPass=false;
+        PreparedStatement ps;
+            ResultSet rs = null;
+          String query= "SELECT * FROM ADMIN WHERE username=? AND password=?";
+        try {
+            ps=myConnection.getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, oldPass);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                checkPass=true;
+            }
+            
+                    } catch (SQLException ex) {
+            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(!password.equals(confPassword)){
             JOptionPane.showMessageDialog(null,"Passwords do not match","ERROR",JOptionPane.WARNING_MESSAGE);
         }
+        
+        else if(checkPass==false){
+            JOptionPane.showMessageDialog(null, "The old password is incorrect","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
         else{
 
-            PreparedStatement ps;
-            ResultSet rs;
-            String query="UPDATE admin SET password=? WHERE username=? AND PASSWORD=?";
+           
+            query="UPDATE admin SET password=? WHERE username=? AND password=?";
             try {
                 ps= myConnection.getConnection().prepareStatement(query);
                 ps.setString(1, password);
@@ -210,6 +229,7 @@ public class ChangePassword extends javax.swing.JFrame {
                 ps.setString(3,oldPass);
                 if(ps.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null,"Password change successfully","Password changed",JOptionPane.INFORMATION_MESSAGE);
+                 this.dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Could not change password","Password Error",JOptionPane.ERROR_MESSAGE);

@@ -5,9 +5,25 @@
  */
 package classes.frames.user;
 import classes.frames.admin.*;
+import static classes.frames.user.Test2.getConnection;
 import classes.frames.user.myConnection;
+import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -22,9 +38,12 @@ public class Encrypted extends javax.swing.JPanel {
      */
     public Encrypted() {
         initComponents();
-        Table();
+   
     }
-
+   public Encrypted(String username) {
+        initComponents();
+  
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,37 +53,159 @@ public class Encrypted extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        usern = new javax.swing.JLabel();
+        input = new javax.swing.JTextField();
+        btnHome1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        lbl_image = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        dec_label = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        key = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jUsername = new javax.swing.JLabel();
 
-        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "Encrypted Images", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(0, 0, 255))); // NOI18N
+        setMaximumSize(new java.awt.Dimension(32767889, 32767899));
         setMinimumSize(new java.awt.Dimension(607, 307));
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(102, 102, 102));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Date", "Time", "Notification"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+        usern.setFont(new java.awt.Font("Tahoma", 0, 5)); // NOI18N
+        usern.setForeground(new java.awt.Color(240, 240, 240));
+        usern.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        input.setBackground(new java.awt.Color(0, 0, 255));
+        input.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        input.setForeground(new java.awt.Color(255, 255, 255));
+        input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputActionPerformed(evt);
             }
         });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+
+        btnHome1.setBackground(new java.awt.Color(0, 0, 255));
+        btnHome1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnHome1.setForeground(new java.awt.Color(255, 255, 255));
+        btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/search1.png"))); // NOI18N
+        btnHome1.setText("Search");
+        btnHome1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnHome1.setIconTextGap(0);
+        btnHome1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHome1ActionPerformed(evt);
+            }
+        });
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 5, true), "Selected Image", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 255))); // NOI18N
+        jPanel5.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        lbl_image.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+        );
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 5, true), "Decrypted Image", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(0, 0, 255))); // NOI18N
+        jPanel6.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        dec_label.setMaximumSize(new java.awt.Dimension(100, 100));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dec_label, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dec_label, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+        );
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 255));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/delete1.png"))); // NOI18N
+        jButton3.setText("Delete");
+        jButton3.setIconTextGap(0);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(0, 0, 255));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/send2.png"))); // NOI18N
+        jButton4.setText("Send");
+        jButton4.setIconTextGap(0);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/decrypt2.jpg"))); // NOI18N
+        jButton2.setText("Decrypt");
+        jButton2.setIconTextGap(0);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Key");
+        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 2, true));
+
+        key.setBackground(new java.awt.Color(0, 0, 255));
+        key.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        key.setForeground(new java.awt.Color(255, 255, 255));
+        key.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keyActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Image ID:");
+        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 2, true));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Image ID", "Decrypted date"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -72,37 +213,328 @@ public class Encrypted extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton2)
+                                .addGap(24, 24, 24)
+                                .addComponent(jButton3)))
+                        .addGap(28, 28, 28)
+                        .addComponent(usern, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(32, 32, 32)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(258, 258, 258))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20, 20, 20)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(786, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usern, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(13, 13, 13)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(448, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-void username(String username){
-    jUsername.setText(username);
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String keys=key.getText();
+        
+        String id=input.getText();
+        PreparedStatement ps;
+        ResultSet rs;
+        String query="SELECT * FROM encrypted WHERE img_id=?";
+        try {
+            ps=myConnection.getConnection().prepareStatement(query);
+            ps.setString(1, id);
+            rs=ps.executeQuery();
+            if(rs.next()){
+            String decryptKey= rs.getString("enc_key");
+                newFiles(keys); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputActionPerformed
+public void newFiles(String keys) throws FileNotFoundException, IOException{
+      String rename= JOptionPane.showInputDialog(null,"Enter the name of the new file");
+    PreparedStatement ps = null;
+     ResultSet rs;
+     keys=key.getText();
+     String query="SELECT * FROM filemanager WHERE messages=?";
+         try {
+             ps=getConnection().prepareStatement(query);
+             ps.setString(1,keys);
+             rs=ps.executeQuery();
+             if(rs.next()){
+                 
+             
+                  query= "SELECT * FROM fileManager WHERE messages=?";
+                try {
+                    ps=getConnection().prepareStatement(query);
+                    ps.setString(1, keys);
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                       String file="C:\\Users\\Kib\\Desktop\\"+rename+".png";
+                       FileOutputStream fos=new FileOutputStream(file);
+                      
+                        byte[] img = rs.getBytes("files");
+                        
+                          ImageIcon image=new ImageIcon(img);
+                        Image im= image.getImage();
+                        Image myImg= im.getScaledInstance(dec_label.getWidth(),dec_label.getHeight(), Image.SCALE_SMOOTH);
+                         fos.write(img);
+                        ImageIcon newImage= new ImageIcon(myImg);
+                        dec_label.setIcon(newImage);
+                        String username=usern.getText();
+                        InputStream files= new FileInputStream(new File(file));
+                        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+                        query= "INSERT INTO decrypted(username,img_data,dec_date)values(?,?,?)";
+                    ps=myConnection.getConnection().prepareStatement(query);
+                       ps.setString(1, username);
+                       ps.setBlob(2,files);
+                       ps.setTimestamp(3,date);
+                       ps.executeUpdate();
+                        UserHome uh= new UserHome();
+                           uh.Home(username);
+                    }
+                    else{
+                       JOptionPane.showMessageDialog(null,"Could find image","ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(Test2.class.getName()).log(Level.SEVERE, null, ex);
+         }
+                      
+                        
 }
-public void Table(){
+    private void btnHome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHome1ActionPerformed
+            String id= input.getText();
+            if(id.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Please enter image ID","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                ResultSet rs;
+                PreparedStatement ps;
+                String query= "SELECT * FROM encrypted WHERE img_id=?";
+                try {
+                    ps=myConnection.getConnection().prepareStatement(query);
+                    ps.setString(1, id);
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                        byte[] img= rs.getBytes("img_data");
+                        ImageIcon image=new ImageIcon(img);
+                        Image im= image.getImage();
+                        Image myImg= im.getScaledInstance(lbl_image.getWidth(),lbl_image.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon newImage= new ImageIcon(myImg);
+                        lbl_image.setIcon(newImage);
+                        String keys= rs.getString("enc_key");
+                        key.setText(keys);
+                    }
+                    else{
+                       JOptionPane.showMessageDialog(null,"Could find image","ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+    }//GEN-LAST:event_btnHome1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        String image_id= input.getText();
+        int confirm= JOptionPane.showConfirmDialog(null,"Do you want to delete the image?","CONFIRM",JOptionPane.YES_NO_OPTION);
+      if(confirm==JOptionPane.YES_OPTION){
+          try {
+           
+              PreparedStatement ps;
+              ResultSet rs;
+              String query= "DELETE FROM encrypted WHERE img_id=?";
+              ps=myConnection.getConnection().prepareStatement(query);
+              ps.setString(1, image_id);
+              int exe=ps.executeUpdate();
+              if(exe>0){
+                  JOptionPane.showMessageDialog(null, "Image deleted","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+                  String username= usern.getText();
+                  Table(username);
+                  UserHome uh= new UserHome();
+                  uh.Home(username);
+              }
+              else{
+                   JOptionPane.showMessageDialog(null, "Could not delete image","ERROR",JOptionPane.ERROR_MESSAGE);
+              }
+          } catch (SQLException ex) {
+              Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String id= input.getText();
+        if(id.isEmpty()){
+              JOptionPane.showMessageDialog(null,"Please select an image","ERROR",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            String receiver= JOptionPane.showInputDialog(null, "Enter the username of the receiver");
+            ResultSet rs;
+                java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+                PreparedStatement ps;
+            String query="SELECT * FROM users WHERE username=?";
+           
+            try {
+                 ps=myConnection.getConnection().prepareStatement(query);
+                 ps.setString(1,receiver);
+                 rs=ps.executeQuery();
+                 if(!rs.next()){
+                    JOptionPane.showMessageDialog(null,"User does not exist","ERROR",JOptionPane.ERROR_MESSAGE);
+                } 
+                else{
+                    try {
+                        String keys= key.getText();
+                         String sender=usern.getText();
+                         Blob img= null;
+                         query= "SELECT * FROM encrypted WHERE img_id=?";
+                         ps=myConnection.getConnection().prepareStatement(query);
+                         ps.setString(1, id);
+                         rs=ps.executeQuery();
+                        if(rs.next()){
+                            img= rs.getBlob("img_data");  
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Could not retrive image");
+                        }
+                        query ="INSERT INTO sent(sender,receiver, img_data, sent_date, dec_key)values(?,?,?,?,?)";
+                        ps=myConnection.getConnection().prepareStatement(query);
+                        ps.setString(1,sender);
+                        ps.setString(2, receiver);
+                        ps.setBlob(3,img);
+                        ps.setTimestamp(4,date);
+                        ps.setString(5, keys);
+                        int exe=ps.executeUpdate();
+                        if(exe==1){
+                             JOptionPane.showMessageDialog(null,"Image sent successfully","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+                         UserHome uh= new UserHome();
+                         String username= sender;
+                         uh.Home(username);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"Could not sent image","ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    catch (SQLException ex) {
+                         Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } 
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(Encrypted.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        } 
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_keyActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        try{
+            int row=jTable1.getSelectedRow();
+            String table_click=(jTable1.getModel().getValueAt(row, 0).toString());
+            PreparedStatement ps;
+            ResultSet rs;
+            String query= "SELECT * FROM encrypted WHERE img_id=?";
+            ps=myConnection.getConnection().prepareStatement(query);
+            ps.setString(1,table_click);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                byte[] img= rs.getBytes("img_data");
+                ImageIcon image=new ImageIcon(img);
+                Image im= image.getImage();
+                Image myImg= im.getScaledInstance(lbl_image.getWidth(),lbl_image.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon newImage= new ImageIcon(myImg);
+                lbl_image.setIcon(newImage);
+                String keys= rs.getString("enc_key");
+                key.setText(keys);
+                String id=rs.getString("img_id");
+                input.setText(id);
+                
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+ 
+public void Table(String username){
+    usern.setText(username);
     PreparedStatement ps = null;
         ResultSet rs = null;
     try{
-        String username= jUsername.getText();
-        String sql= "select img_id,enc_date from encrypted where username=?";
+      
+        String sql= "select img_id, enc_date from encrypted where username=? order by img_id desc";
         ps=myConnection.getConnection().prepareStatement(sql);
-        ps.setString(1, username);
+        ps.setString(1,username);
         rs= ps.executeQuery();
-        jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+       jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        
+     
         
     }
     catch(Exception e){
@@ -119,8 +551,20 @@ public void Table(){
     }
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHome1;
+    private javax.swing.JLabel dec_label;
+    private javax.swing.JTextField input;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel jUsername;
+    private javax.swing.JTextField key;
+    private javax.swing.JLabel lbl_image;
+    private javax.swing.JLabel usern;
     // End of variables declaration//GEN-END:variables
 }

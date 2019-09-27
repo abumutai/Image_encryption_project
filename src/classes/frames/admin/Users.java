@@ -83,10 +83,15 @@ public class Users extends javax.swing.JPanel {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnHome.setBackground(new java.awt.Color(0, 0, 255));
-        btnHome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnHome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnHome.setForeground(new java.awt.Color(255, 255, 255));
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/delete1.png"))); // NOI18N
         btnHome.setText("Delete");
@@ -98,7 +103,7 @@ public class Users extends javax.swing.JPanel {
         });
 
         btnHome1.setBackground(new java.awt.Color(0, 0, 255));
-        btnHome1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnHome1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnHome1.setForeground(new java.awt.Color(255, 255, 255));
         btnHome1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/classes/images/search1.png"))); // NOI18N
         btnHome1.setText("Search");
@@ -112,7 +117,6 @@ public class Users extends javax.swing.JPanel {
 
         jID.setEditable(false);
         jID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jID.setForeground(new java.awt.Color(0, 0, 255));
         jID.setToolTipText("Enter username");
         jID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,19 +124,18 @@ public class Users extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("ID");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Username:");
 
         jUsername.setEditable(false);
         jUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jUsername.setForeground(new java.awt.Color(0, 0, 255));
         jUsername.setToolTipText("Enter username");
         jUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +143,7 @@ public class Users extends javax.swing.JPanel {
             }
         });
 
-        jUsername2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jUsername2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jUsername2.setForeground(new java.awt.Color(0, 0, 255));
         jUsername2.setToolTipText("Enter username");
         jUsername2.addActionListener(new java.awt.event.ActionListener() {
@@ -149,14 +152,13 @@ public class Users extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Email:");
 
         jEmail.setEditable(false);
         jEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jEmail.setForeground(new java.awt.Color(0, 0, 255));
         jEmail.setToolTipText("Enter username");
         jEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,9 +183,7 @@ public class Users extends javax.swing.JPanel {
                             .addComponent(jUsername2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnHome1)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btnHome1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,8 +193,8 @@ public class Users extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addComponent(btnHome)))
+                        .addContainerGap(100, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +203,7 @@ public class Users extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jUsername2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -211,15 +211,15 @@ public class Users extends javax.swing.JPanel {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jEmail)
+                            .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -286,6 +286,7 @@ public class Users extends javax.swing.JPanel {
                jUsername2.setText("");
                jID.setText("");
                JOptionPane.showMessageDialog(null,"User deleted successfully","SUCCESS",JOptionPane.INFORMATION_MESSAGE);
+               Table();
            }
            else{
                JOptionPane.showMessageDialog(null,"Could not delete user","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -297,6 +298,33 @@ public class Users extends javax.swing.JPanel {
        
     }//GEN-LAST:event_btnHomeActionPerformed
     }
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+         try{
+            int row=jTable1.getSelectedRow();
+            String table_click=(jTable1.getModel().getValueAt(row, 1).toString());
+            PreparedStatement ps;
+            ResultSet rs;
+           
+                String query= "SELECT * FROM users WHERE username=?";
+                ps=myConnection.getConnection().prepareStatement(query);
+                 ps.setString(1,table_click);
+                 rs=ps.executeQuery();
+                  if(rs.next()){
+                  String uId= rs.getString("ID");
+               jID.setText(uId);
+               String uName= rs.getString("username");
+               jUsername.setText(uName);
+               String uEmail= rs.getString("email");
+               jEmail.setText(uEmail);
+         
+                  }
+             }       
+       
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+    
 public void Table(){
     PreparedStatement ps = null;
         ResultSet rs = null;

@@ -3,10 +3,16 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-        <LineBorder roundedCorners="true" thickness="3">
-          <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
-        </LineBorder>
+      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+        <TitledBorder justification="2" position="2" title="Today&apos;s Summary">
+          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder roundedCorners="true" thickness="2">
+              <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
+            </LineBorder>
+          </Border>
+          <Font PropertyName="font" name="Tahoma" size="14" style="1"/>
+          <Color PropertyName="color" blue="ff" green="0" red="0" type="rgb"/>
+        </TitledBorder>
       </Border>
     </Property>
   </Properties>
@@ -26,41 +32,43 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="send" max="32767" attributes="0"/>
                   <Component id="send2" pref="121" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="send1" pref="123" max="32767" attributes="0"/>
-                  <Component id="settings" pref="123" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace pref="96" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="send3" pref="121" max="32767" attributes="0"/>
-                  <Component id="help" pref="121" max="32767" attributes="0"/>
+                  <Component id="send1" min="-2" pref="123" max="-2" attributes="0"/>
+                  <Component id="settings" min="-2" pref="123" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="send3" pref="124" max="32767" attributes="0"/>
+                  <Component id="help" pref="124" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="send1" min="-2" max="-2" attributes="0"/>
-                  <Component id="send" min="-2" max="-2" attributes="0"/>
-                  <Component id="send3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="settings" alignment="0" pref="168" max="32767" attributes="0"/>
-                  <Component id="help" alignment="0" pref="168" max="32767" attributes="0"/>
-                  <Component id="send2" alignment="0" pref="168" max="32767" attributes="0"/>
+                  <Component id="send1" max="32767" attributes="0"/>
+                  <Component id="send3" max="32767" attributes="0"/>
+                  <Component id="send" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="send2" alignment="1" pref="153" max="32767" attributes="0"/>
+                      <Component id="help" alignment="1" pref="153" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="settings" min="-2" pref="153" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,7 +121,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel18" min="-2" pref="17" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jNewUsers" pref="22" max="32767" attributes="0"/>
+                  <Component id="jNewUsers" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -121,6 +129,11 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel17">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/classes/images/newusers.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
@@ -275,20 +288,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="jDecrypted" min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                  <Component id="jDecrypted" min="-2" pref="21" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
@@ -297,13 +306,12 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="jLabel21" min="-2" pref="56" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel22" min="-2" pref="26" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="jDecrypted" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -383,7 +391,7 @@
                           <Component id="jSent" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -476,7 +484,7 @@
                           <Component id="jButton2" min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -578,7 +586,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jIssues" min="-2" pref="31" max="-2" attributes="0"/>
@@ -616,6 +624,11 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/classes/images/issues.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>

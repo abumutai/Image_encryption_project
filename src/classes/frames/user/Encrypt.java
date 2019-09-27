@@ -11,8 +11,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,6 +62,7 @@ public class Encrypt extends javax.swing.JPanel {
         lbl_image = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         lbl_enc = new javax.swing.JLabel();
+        user = new javax.swing.JLabel();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
@@ -186,16 +189,13 @@ public class Encrypt extends javax.swing.JPanel {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -208,17 +208,11 @@ public class Encrypt extends javax.swing.JPanel {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_enc, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lbl_enc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_enc, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lbl_enc, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -226,9 +220,11 @@ public class Encrypt extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
+                .addGap(18, 18, 18)
+                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -237,21 +233,27 @@ public class Encrypt extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputActionPerformed
-
+void username(String username){
+    user.setText(username);
+}
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          if(input1.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null,"Please select an image","ERROR",JOptionPane.WARNING_MESSAGE);
@@ -265,31 +267,29 @@ public class Encrypt extends javax.swing.JPanel {
             BufferedImage img= null;
             
             img= ImageIO.read(origin);
+            String files=fileName;
             BufferedImage gray= new BufferedImage(img.getWidth(),img.getHeight(),BufferedImage.TYPE_INT_ARGB);
             int r=0,a=0,b=0,g=0,r2=0,a2=0,b2=0,g2=0,r1=0,a1=0,b1=0,g1=0;
-         r1= (int)(Math.random()*255);
-         a1= (int)(Math.random()*255);
-         b1= (int)(Math.random()*255);
-         g1= (int)(Math.random()*255);
+         
               int width= img.getWidth();
               int height= img.getHeight();
-             
-              
+                    
             for(int i=0;i<width;i++){
                 for(int j=0;j<height;j++){
-                    
-              
-        
-            int p = img.getRGB(i,j);
+                  
+               int p = img.getRGB(i,j);
                  a = (p>>24)&0xff;
                  r = (p>>16)&0xff;
                  g = (p>>8)&0xff;
                  b = p&0xff;
-                
-                     r=255-r;
-                     g=255-g;
-                     b=255-b;
-                     a=255-a;
+                    r1= (int)(Math.random()*255);
+                    a1= (int)(Math.random()*255);
+                    b1= (int)(Math.random()*255);
+                    g1= (int)(Math.random()*255);
+                     r=255-r1;
+                     g=255-g1;
+                     b=255-b1;
+                     a=255-a1;
                     
                     Color gColor= new Color(r,a,b,g);
                    
@@ -298,8 +298,11 @@ public class Encrypt extends javax.swing.JPanel {
                     
                 }
             }
+            String key=r+" "+a+" "+b+" "+g;
+                     input2.setText(key);
             String rename="";
             String newName= input.getText();
+            
             if(newName.isEmpty()){
                 rename="encrypted";
             }
@@ -307,38 +310,37 @@ public class Encrypt extends javax.swing.JPanel {
                 rename=newName;
             }
            
-            String newfile="C:\\Users\\MUTAI\\Desktop\\IMAGES\\output\\"+rename+".png";
-           ImageIO.write(gray, "png",new File(newfile)); 
-           
+              String newfile="C:\\Users\\Kib\\Desktop\\"+rename+".png";
+              ImageIO.write(gray, "png",new File(newfile));
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(newfile).getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
         lbl_enc.setIcon(imageIcon);
         JOptionPane.showMessageDialog(null, "Image successfully encrypted","Encryption Success",JOptionPane.INFORMATION_MESSAGE);
-      
+         
         PreparedStatement ps;
         ResultSet rs;
-        String key=input2.getText();
+         key=input2.getText();
+         String messages=key;
+         Test2 ts= new Test2();
+         ts.testing(files,messages);
          java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-        String query ="INSERT INTO encrypted(username, img_data, enc_date,first, second, third, fourth, fifth, sixth,seventh,eighth ) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String query ="INSERT INTO encrypted(username, img_data, enc_date,enc_key ) VALUES(?,?,?,?)";
              try {
                  ps= myConnection.getConnection().prepareStatement(query);
                  InputStream file= new FileInputStream(new File(newfile));
-                String username="Abu";
+                String username=user.getText();
                  ps.setString(1, username);
                  ps.setBlob(2,file);
                  ps.setTimestamp(3,date);
-                 ps.setInt(4,r1);
-                 ps.setInt(5, a1);
-                 ps.setInt(6,b1);
-                 ps.setInt(7,g1);
-                 ps.setInt(8,r2);
-                  ps.setInt(9,a2);
-                  ps.setInt(10,b2);
-                  ps.setInt(11,g2);
+                 ps.setString(4,key);
+                
                  int exe=ps.executeUpdate();
                  if(exe==1){
                      JOptionPane.showMessageDialog(null,"IMage inserted");
                      input1.setText("");
+                      UserHome uh= new UserHome();
+                        uh.updateEnc(username);
                  }
+                 
              } catch (SQLException ex) {
                  Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
              }
@@ -369,7 +371,7 @@ public class Encrypt extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(null,"No file selected","ERROR",JOptionPane.WARNING_MESSAGE);
        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+  
     private void input1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_input1ActionPerformed
@@ -392,5 +394,6 @@ public class Encrypt extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lbl_enc;
     private javax.swing.JLabel lbl_image;
+    private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }
